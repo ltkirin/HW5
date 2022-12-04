@@ -62,7 +62,7 @@ namespace HW5.Server.Business.Service
         public async Task<Response> DeleteOperator(int operatorId) => await Delete<Operator>(operatorId);
 
         public async Task<Response<IList<Operator>>> GetOperators(GetListRequest request) => await GetEntities<Operator>(request);
-        public async Task<Response<Operator>> GetOperatDetails(int id, bool includeReposrts)
+        public async Task<Response<Operator>> GetOperatorDetails(int id, bool includeReposrts)
         {
             var query = context.Operators.AsQueryable().Where(x => x.Id == id && !x.IsDeleted);
             if (includeReposrts)

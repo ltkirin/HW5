@@ -23,6 +23,9 @@ namespace HW5.Server.Api.Controllers
         }
 
         [HttpGet]
+        [Route("/details")]
+        public async Task<Response<Operator>> GetOperatorDetails([FromQuery] int id, [FromQuery] bool includeQuestionnaires = false) => await operatorsService.GetOperatorDetails(id, includeQuestionnaires);
+        [HttpGet]
         public async Task<Response<IList<Operator>>> GetOperators([FromQuery]GetListRequest request) => await operatorsService.GetOperators(request);
         [HttpPost]
         public async Task<Response<Operator>> CreateOperator([FromForm]CreateOperatorRequest request) => await operatorsService.CreateOperator(request);
