@@ -22,7 +22,7 @@ namespace HW5.Server.Api.Controllers
             this.clientService = clientService;
         }
         [HttpGet]
-        [Route("/details")]
+        [Route("api/[controller]/details")]
         public async Task<Response<Client>> GetClientDetails([FromQuery] int id, [FromQuery] bool includeQuestionnaires = false)
     => await clientService.GetClientDetails(id, includeQuestionnaires);
         [HttpGet]

@@ -25,7 +25,7 @@ namespace HW5.Server.Business.Service
             {
                 oper.FirstName = request.FirstName;
                 oper.LastName = request.LastName;
-                oper.MiddleName = oper.MiddleName;
+                oper.MiddleName = request.MiddleName;
                 oper.BirthDate = request.BirthDate;
                 oper.PhoneNumber = request.PhoneNumber;
                 oper.JobTitle = request.JobTitle;
@@ -67,7 +67,7 @@ namespace HW5.Server.Business.Service
             var query = context.Operators.AsQueryable().Where(x => x.Id == id && !x.IsDeleted);
             if (includeReposrts)
             {
-                query = query.Include(x => x.Questionnaires);
+                query = query.Include(x => x.Questionnaires.Where(x => !x.IsDeleted));
             }
             var searchResult = await query.ToArrayAsync();
             if (searchResult.Any())
