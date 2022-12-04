@@ -45,7 +45,7 @@ namespace HW5.Server.Business.Service
             {
                 client.FirstName = request.FirstName;
                 client.LastName = request.LastName;
-                client.MiddleName = client.MiddleName;
+                client.MiddleName = request.MiddleName;
                 client.BirthDate = request.BirthDate;
                 client.PhoneNumber = request.PhoneNumber;
                 await context.SaveChangesAsync();
@@ -64,7 +64,7 @@ namespace HW5.Server.Business.Service
             var query = context.Clients.AsQueryable().Where(x => x.Id == id && !x.IsDeleted);
             if (includeReposrts)
             {
-                query = query.Include(x => x.Questionnaires);
+                query = query.Include(x => x.Questionnaires.Where(x => !x.IsDeleted));
             }
             var searchResult = await query.ToArrayAsync();
             if (searchResult.Any())

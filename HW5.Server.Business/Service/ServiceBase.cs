@@ -20,20 +20,20 @@ namespace HW5.Server.Business.Service
             this.context = context;
         }
 
-        public async Task<Response> Delete<TEntity>(int operatorId) where TEntity : EntityBase
+        public async Task<Response> Delete<TEntity>(int id) where TEntity : EntityBase
         {
             try
             {
-                var oper = await GetEntitiesQuerable<TEntity>().FirstOrDefaultAsync(x => x.Id == operatorId && !x.IsDeleted);
-                if (oper != null)
+                var entity = await GetEntitiesQuerable<TEntity>().FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
+                if (entity != null)
                 {
-                    oper.IsDeleted = true;
+                    entity.IsDeleted = true;
                     await context.SaveChangesAsync();
                     return Response.Ok();
                 }
                 else
                 {
-                    return Response.NotFound($"Entity with type {typeof(TEntity).GetType().Name} and Id {operatorId} is not found or already deleted");
+                    return Response.NotFound($"Entity with type {typeof(TEntity).GetType().Name} and Id {id} is not found or already deleted");
                 }
             }
             catch (Exception e)
