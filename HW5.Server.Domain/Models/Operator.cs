@@ -11,5 +11,6 @@ namespace HW5.Server.Domain.Models
     {
         public OperatorsJobTitle JobTitle { get; set; }
         public int WorkExperience { get; set; }
+        public HashSet<Questionnaire> Questionnaires { get; set; }
     }
 }

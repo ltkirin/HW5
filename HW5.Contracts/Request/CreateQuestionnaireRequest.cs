@@ -1,17 +1,12 @@
-﻿using System;
-
-namespace HW5.Server.Domain.Models
+﻿namespace HW5.Contracts.Request
 {
-    public class Questionnaire : EntityBase
-    { 
+    public class CreateQuestionnaireRequest
+    {
         public int ClientId { get; set; }
-        public Client Client { get; set; }
         public int OperatorId { get; set; }
-        public Operator Operator { get; set; }
         public double ClientIncome { get; set; }
         public double PaymentAbiliry { get; set; }
         public int CreditsCount { get; set; }
         public int DepositesCount { get; set; }
-        public DateTime CreationDate { get; set; }
     }
 }
