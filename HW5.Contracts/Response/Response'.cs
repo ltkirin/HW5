@@ -11,6 +11,8 @@ namespace HW5.Contracts.Response
         public string Message { get; set; }
         public int StatusCode { get; set; }
 
+        public IDictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+
         public static Response Bad(string message)
         {
             return new Response()

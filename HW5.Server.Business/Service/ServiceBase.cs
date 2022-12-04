@@ -1,4 +1,5 @@
 ﻿using HW5.Server.DataAccess.Context;
+using HW5.Server.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,18 @@ namespace HW5.Server.Business.Service
         public ServiceBase(PgSqlApplicationContext context)
         {
             this.context = context;
+        }
+
+        protected IQueryable<TEntity> GetEntitiesQuerable<TEntity>() where TEntity : EntityBase
+        {
+            var dbset = context
+               .Set<TEntity>();
+            if(dbset != null)
+            {
+                return dbset.AsQueryable()
+               .Where(x => !x.IsDeleted);
+            }
+            throw new TypeLoadException($"No dbset for {typeof(TEntity).GetType().Name} type");
         }
     }
 }

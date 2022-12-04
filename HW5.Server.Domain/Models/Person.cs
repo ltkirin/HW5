@@ -12,6 +12,6 @@ namespace HW5.Server.Domain.Models
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public DateTime BirthDate { get; set; }
-        public uint PhoneNumber { get; set; }
+        public ulong PhoneNumber { get; set; }
     }
 }
