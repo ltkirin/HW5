@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HW5.Contracts.Models
+namespace HW5.Contracts.Request
 {
     public class CreateOperatorRequest
     {

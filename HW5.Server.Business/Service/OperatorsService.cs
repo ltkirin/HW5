@@ -1,11 +1,9 @@
-﻿using HW5.Contracts.Models;
-using HW5.Contracts.Response;
+﻿using HW5.Contracts.Response;
 using HW5.Server.DataAccess.Context;
 using HW5.Server.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Mapster;
 using HW5.Server.Business.Interfaces;
@@ -20,6 +18,28 @@ namespace HW5.Server.Business.Service
         {
         }
 
+        public async Task<Response<Operator>> UpdateOperator(UpdateOperatorRequest request)
+        {
+            var oper = await context.Operators.FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == request.Id);
+            if (oper != null)
+            {
+                oper.FirstName = request.FirstName;
+                oper.LastName = request.LastName;
+                oper.MiddleName = oper.MiddleName;
+                oper.BirthDate = request.BirthDate;
+                oper.PhoneNumber = request.PhoneNumber;
+                oper.JobTitle = request.JobTitle;
+                oper.WorkExperience = request.WorkExperience;
+                await context.SaveChangesAsync();
+                return Response<Operator>.Ok(oper);
+
+            }
+            else
+            {
+                return Response<Operator>.NotFound($"Operator with Id {request.Id} Not found");
+            }
+
+        }
         public async Task<Response<Operator>> CreateOperator(CreateOperatorRequest request)
         {
             try
@@ -39,49 +59,28 @@ namespace HW5.Server.Business.Service
 
         }
 
-        public async Task<Response> DeleteOperator(int operatorId)
+        public async Task<Response> DeleteOperator(int operatorId) => await Delete<Operator>(operatorId);
+
+        public async Task<Response<IList<Operator>>> GetOperators(GetListRequest request) => await GetEntities<Operator>(request);
+        public async Task<Response<Operator>> GetOperatDetails(int id, bool includeReposrts)
         {
-            try
+            var query = context.Operators.AsQueryable().Where(x => x.Id == id && !x.IsDeleted);
+            if (includeReposrts)
             {
-                var oper = await GetEntitiesQuerable<Operator>().FirstOrDefaultAsync(x => x.Id == operatorId && !x.IsDeleted);
-                if (oper != null)
-                {
-                    oper.IsDeleted = true;
-                    await context.SaveChangesAsync();
-                    return Response.Ok();
-                }
-                else
-                {
-                    return Response.NotFound($"Opertaor with Id {operatorId} is not found or already deleted"); ;
-                }
+                query = query.Include(x => x.Questionnaires);
             }
-            catch (Exception e)
+            var searchResult = await query.ToArrayAsync();
+            if (searchResult.Any())
             {
-                return Response.Failed(e.Message);
+                return Response<Operator>.Ok(searchResult.First());
             }
+            else
+            {
+                return Response<Operator>.NotFound($"Operator with Id {id} Not found");
+            }
+
         }
 
-        public async Task<Response<IList<Operator>>> GetOperators(GetListRequest request)
-        {
-            try
-            {
-                var querable = GetEntitiesQuerable<Operator>();
-                var count = await querable.CountAsync();
-                var operators = await querable
-                    .AsNoTracking()
-                    .Skip(request.PageCount * request.PageSize)
-                    .Take(request.PageSize)
-                    .ToArrayAsync();
-
-                var result = Response<IList<Operator>>.Ok(operators);
-                result.Metadata.Add("Total", $"{count}");
-                return result;
-            }
-            catch (Exception e)
-            {
-                return Response<IList<Operator>>.Failed(e.Message);
-            }
-        }
 
 
     }

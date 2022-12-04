@@ -1,5 +1,4 @@
-﻿using HW5.Contracts.Models;
-using HW5.Contracts.Request;
+﻿using HW5.Contracts.Request;
 using HW5.Contracts.Response;
 using HW5.Server.Business.Interfaces;
 using HW5.Server.Domain.Models;
