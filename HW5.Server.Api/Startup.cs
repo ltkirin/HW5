@@ -1,4 +1,5 @@
 using HW5.Server.Business;
+using HW5.Server.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace HW5.Server.Api
 
             services.AddControllers();
             services.AddBusiness();
+            services.AddDataAccess();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HW5.Server.Api", Version = "v1" });
