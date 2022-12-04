@@ -28,9 +28,9 @@ namespace HW5.Server.Api.Controllers
         [HttpGet]
         public async Task<Response<IList<Client>>> GetOperators([FromQuery] GetListRequest request) => await clientService.GetClients(request);
         [HttpPost]
-        public async Task<Response<Client>> CreateOperator([FromForm] CreateClientRequest request) => await clientService.CreateClient(request);
+        public async Task<Response<Client>> CreateOperator(CreateClientRequest request) => await clientService.CreateClient(request);
         [HttpDelete]
-        public async Task<Response> CreateOperator([FromQuery] int id) => await clientService.DeleteClient(id);
+        public async Task<Response> CreateOperator(int id) => await clientService.DeleteClient(id);
 
     }
 }
