@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HW5.Client.Terminal", "HW5.Client.Terminal\HW5.Client.Terminal.csproj", "{C193F3D2-2F12-40D2-8699-FCF18CA1A99B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HW5.Contracts", "HW5.Contracts\HW5.Contracts.csproj", "{C705A11C-2123-4DAC-8BC4-FF08948F355A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C193F3D2-2F12-40D2-8699-FCF18CA1A99B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C193F3D2-2F12-40D2-8699-FCF18CA1A99B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C193F3D2-2F12-40D2-8699-FCF18CA1A99B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C193F3D2-2F12-40D2-8699-FCF18CA1A99B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C705A11C-2123-4DAC-8BC4-FF08948F355A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C705A11C-2123-4DAC-8BC4-FF08948F355A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C705A11C-2123-4DAC-8BC4-FF08948F355A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C705A11C-2123-4DAC-8BC4-FF08948F355A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07AA1CCD-5362-4F5B-B959-692E94879074}
+	EndGlobalSection
+EndGlobal
