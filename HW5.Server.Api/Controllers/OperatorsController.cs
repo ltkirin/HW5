@@ -28,8 +28,8 @@ namespace HW5.Server.Api.Controllers
         [HttpGet]
         public async Task<Response<IList<Operator>>> GetOperators([FromQuery]GetListRequest request) => await operatorsService.GetOperators(request);
         [HttpPost]
-        public async Task<Response<Operator>> CreateOperator([FromForm]CreateOperatorRequest request) => await operatorsService.CreateOperator(request);
+        public async Task<Response<Operator>> CreateOperator(CreateOperatorRequest request) => await operatorsService.CreateOperator(request);
         [HttpDelete]
-        public async Task<Response> CreateOperator([FromQuery] int id) => await operatorsService.DeleteOperator(id);
+        public async Task<Response> CreateOperator(int id) => await operatorsService.DeleteOperator(id);
     }
 }

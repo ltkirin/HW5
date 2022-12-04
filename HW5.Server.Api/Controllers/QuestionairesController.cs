@@ -30,8 +30,8 @@ namespace HW5.Server.Api.Controllers
         [HttpGet]
         public async Task<Response<IList<Questionnaire>>> GetQuestionnaires([FromQuery] GetListRequest request) => await questionnairesService.GetQuestionnaires(request);
         [HttpPost]
-        public async Task<Response<Questionnaire>> CreateQuestionnaire([FromForm] CreateQuestionnaireRequest request) => await questionnairesService.CreateQuestionnaire(request);
+        public async Task<Response<Questionnaire>> CreateQuestionnaire(CreateQuestionnaireRequest request) => await questionnairesService.CreateQuestionnaire(request);
         [HttpDelete]
-        public async Task<Response> DeleteQuestionnaire([FromQuery] int id) => await questionnairesService.DeleteQuestionnaire(id);
+        public async Task<Response> DeleteQuestionnaire(int id) => await questionnairesService.DeleteQuestionnaire(id);
     }
 }
