@@ -12,5 +12,9 @@ namespace HW5.Server.Business.Interfaces
     public interface IClientService
     {
         Task<Response<Client>> CreateClient(CreateClientRequest command);
+        Task<Response> DeleteClient(int operatorId);
+        Task<Response<Client>> GetClientDetails(int id, bool includeReposrts);
+        Task<Response<IList<Client>>> GetClients(GetListRequest request);
+        Task<Response<Client>> UpdateClient(UpdateClientRequest request);
     }
 }

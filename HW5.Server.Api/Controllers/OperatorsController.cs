@@ -1,5 +1,4 @@
-﻿using HW5.Contracts.Models;
-using HW5.Contracts.Request;
+﻿using HW5.Contracts.Request;
 using HW5.Contracts.Response;
 using HW5.Server.Business.Interfaces;
 using HW5.Server.Domain.Models;
@@ -23,6 +22,9 @@ namespace HW5.Server.Api.Controllers
             this.operatorsService = operatorsService;
         }
 
+        [HttpGet]
+        [Route("/details")]
+        public async Task<Response<Operator>> GetOperatorDetails([FromQuery] int id, [FromQuery] bool includeQuestionnaires = false) => await operatorsService.GetOperatorDetails(id, includeQuestionnaires);
         [HttpGet]
         public async Task<Response<IList<Operator>>> GetOperators([FromQuery]GetListRequest request) => await operatorsService.GetOperators(request);
         [HttpPost]
