@@ -24,11 +24,14 @@ namespace HW5.Server.Api.Controllers
         }
 
         [HttpGet]
-        [Route("/details")]
-        public async Task<Response<Questionnaire>> GetQuestionnaireDetails([FromQuery] int id, [FromQuery] bool includeOwners = false) 
+        [Route("details")]
+        public async Task<Response<Questionnaire>> GetQuestionnaireDetails([FromQuery] int id, [FromQuery] bool includeOwners = false)
             => await questionnairesService.GetQuestionnaireDetails(id, includeOwners);
+        
         [HttpGet]
-        public async Task<Response<IList<Questionnaire>>> GetQuestionnaires([FromQuery] GetListRequest request) => await questionnairesService.GetQuestionnaires(request);
+        public async Task<Response<IList<Questionnaire>>> GetQuestionnaires([FromQuery] int pageCount = 0, [FromQuery] int pageSize = 10) 
+            => await questionnairesService.GetQuestionnaires(new() {PageCount = pageCount, PageSize = pageSize });
+
         [HttpPost]
         public async Task<Response<Questionnaire>> CreateQuestionnaire(CreateQuestionnaireRequest request) => await questionnairesService.CreateQuestionnaire(request);
         [HttpDelete]

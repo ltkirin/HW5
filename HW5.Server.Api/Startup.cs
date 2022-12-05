@@ -40,8 +40,8 @@ namespace HW5.Server.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HW5.Server.Api", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
-         
-               
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +64,8 @@ namespace HW5.Server.Api
             {
                 endpoints.MapControllers();
             });
+
+
         }
     }
 }

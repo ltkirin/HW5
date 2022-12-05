@@ -1,4 +1,5 @@
-﻿using HW5.Server.Domain.Models;
+﻿using HW5.Server.DataAccess.Extensions;
+using HW5.Server.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
@@ -42,22 +43,20 @@ namespace HW5.Server.DataAccess.Context
             {
                 connectionString = extension.ConnectionString;
             }
-            //Database.EnsureDeleted();
-            //Database.EnsureCreated();
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
 
         public PgSqlApplicationContext()
         {
-            //Database.EnsureDeleted();
-            //Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             Console.WriteLine("DB model creating starts!");
+            modelBuilder.BuildModels();
 
             base.OnModelCreating(modelBuilder);
-
 
             Console.WriteLine("New Model created");
         }
