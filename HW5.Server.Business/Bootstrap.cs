@@ -16,6 +16,7 @@ namespace HW5.Server.Business
             services.AddTransient<IClientService, ClientsService>();
             services.AddTransient<IOperatorsService, OperatorsService>();
             services.AddTransient<IQuestionnairesService, QuestionnairesService>();
+            services.AddTransient<IReportsService, ReportsService>();
         }
     }
 }

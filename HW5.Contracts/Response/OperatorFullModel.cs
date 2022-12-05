@@ -13,7 +13,7 @@ namespace HW5.Contracts.Response
         public string MiddleName { get; set; }
         public DateTime BirthDate { get; set; }
         public string PhoneNumber { get; set; }
-        public string JobTitle { get; set; }
+        public int JobTitleIndex { get; set; }
         public int WorkExperience { get; set; }
         public IList<QuestionnaireListModel> Questionnaires { get; set; }
     }
