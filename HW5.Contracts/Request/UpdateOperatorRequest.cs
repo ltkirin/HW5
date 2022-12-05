@@ -1,14 +1,8 @@
-﻿using HW5.Contracts.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HW5.Contracts.Request
 {
-    public class UpdateOperatorRequest : CreateOperatorRequest, IUpdateRequest
+    public class UpdateOperatorRequest : CreateOperatorRequest
     {
         [Required]
         public int Id { get; set; }

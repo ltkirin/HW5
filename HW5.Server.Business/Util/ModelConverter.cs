@@ -60,7 +60,7 @@ namespace HW5.Server.Business.Util
                         FullName = GetFullName(oper),
                         BirthDate = oper.BirthDate,
                         PhoneNumber = GetPhoneString(oper.PhoneNumber),
-                        JobTitle = oper.JobTitle.GetDisplayName(),
+                        JobTitleIndex = (int)oper.JobTitle
                         WorkExperience = oper.WorkExperience
                     });
             }
@@ -78,7 +78,7 @@ namespace HW5.Server.Business.Util
                 BirthDate = oper.BirthDate,
                 PhoneNumber = GetPhoneString(oper.PhoneNumber),
                 WorkExperience = oper.WorkExperience,
-                JobTitle = oper.JobTitle.GetDisplayName()
+                JobTitleIndex = (int)oper.JobTitle
             };
             if (oper.Questionnaires != null && oper.Questionnaires.Any())
             {
@@ -135,7 +135,7 @@ namespace HW5.Server.Business.Util
                 return baseString;
             }
         }
-        private static string GetFullName<TPerson>(TPerson person) where TPerson : Person
+        public static string GetFullName<TPerson>(TPerson person) where TPerson : Person
         {
             StringBuilder builder = new StringBuilder(person.LastName).Append(' ');
             if (string.IsNullOrEmpty(person.MiddleName))
