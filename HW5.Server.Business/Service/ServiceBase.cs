@@ -58,7 +58,8 @@ namespace HW5.Server.Business.Service
             if (dbset != null)
             {
                 return dbset.AsQueryable()
-               .Where(x => !x.IsDeleted);
+               .Where(x => !x.IsDeleted)
+               .OrderBy(x => x.Id);
             }
             throw new TypeLoadException($"No dbset for {typeof(TEntity).GetType().Name} type");
         }
