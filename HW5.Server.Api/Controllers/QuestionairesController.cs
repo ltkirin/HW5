@@ -24,7 +24,7 @@ namespace HW5.Server.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/details")]
+        [Route("/details")]
         public async Task<Response<Questionnaire>> GetQuestionnaireDetails([FromQuery] int id, [FromQuery] bool includeOwners = false) 
             => await questionnairesService.GetQuestionnaireDetails(id, includeOwners);
         [HttpGet]
