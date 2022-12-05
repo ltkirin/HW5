@@ -23,15 +23,15 @@ namespace HW5.Server.Api.Controllers
         }
         [HttpGet]
         [Route("details")]
-        public async Task<Response<Client>> GetClientDetails([FromQuery] int id, [FromQuery] bool includeQuestionnaires = false)
+        public async Task<Response<ClientFullModel>> GetClientDetails([FromQuery] int id, [FromQuery] bool includeQuestionnaires = false)
     => await clientService.GetClientDetails(id, includeQuestionnaires);
         [HttpGet]
-        public async Task<Response<IList<Client>>> GetOperators([FromQuery] int pageCount = 0, [FromQuery] int pageSize = 10) 
+        public async Task<Response<IList<ClientListModel>>> GetClients([FromQuery] int pageCount = 1, [FromQuery] int pageSize = 10) 
             => await clientService.GetClients(new() { PageCount = pageCount, PageSize = pageSize });
         [HttpPost]
-        public async Task<Response<Client>> CreateOperator([FromForm] CreateClientRequest request) => await clientService.CreateClient(request);
+        public async Task<Response<ClientFullModel>> CreateClient([FromForm] CreateClientRequest request) => await clientService.CreateClient(request);
         [HttpDelete]
-        public async Task<Response> CreateOperator([FromQuery] int id) => await clientService.DeleteClient(id);
+        public async Task<Response> DeleteClient([FromQuery] int id) => await clientService.DeleteClient(id);
 
     }
 }

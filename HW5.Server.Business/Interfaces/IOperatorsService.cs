@@ -8,10 +8,10 @@ namespace HW5.Server.Business.Interfaces
 {
     public interface IOperatorsService
     {
-        Task<Response<Operator>> CreateOperator(CreateOperatorRequest command);
+        Task<Response<OperatorFullModel>> CreateOperator(CreateOperatorRequest request);
         Task<Response> DeleteOperator(int operatorId);
-        Task<Response<Operator>> GetOperatorDetails(int id, bool includeReposrts);
-        Task<Response<IList<Operator>>> GetOperators(GetListRequest request);
-        Task<Response<Operator>> UpdateOperator(UpdateOperatorRequest request);
+        Task<Response<OperatorFullModel>> GetOperatorDetails(int id, bool includeReposrts);
+        Task<Response<IList<OperatorListModel>>> GetOperators(GetListRequest request);
+        Task<Response<OperatorFullModel>> UpdateOperator(UpdateOperatorRequest request);
     }
 }

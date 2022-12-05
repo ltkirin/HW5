@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace HW5.Contracts.Response
 {
-    public class Response
+    public class Response : ResponseBase
     {
-        public string Message { get; set; }
-        public int StatusCode { get; set; }
-
-        public IDictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
-
         public static Response Bad(string message)
         {
             return new Response()

@@ -11,10 +11,10 @@ namespace HW5.Server.Business.Interfaces
 {
     public interface IClientService
     {
-        Task<Response<Client>> CreateClient(CreateClientRequest command);
+        Task<Response<ClientFullModel>> CreateClient(CreateClientRequest command);
         Task<Response> DeleteClient(int operatorId);
-        Task<Response<Client>> GetClientDetails(int id, bool includeReposrts);
-        Task<Response<IList<Client>>> GetClients(GetListRequest request);
-        Task<Response<Client>> UpdateClient(UpdateClientRequest request);
+        Task<Response<ClientFullModel>> GetClientDetails(int id, bool includeReposrts);
+        Task<Response<IList<ClientListModel>>> GetClients(GetListRequest request);
+        Task<Response<ClientFullModel>> UpdateClient(UpdateClientRequest request);
     }
 }

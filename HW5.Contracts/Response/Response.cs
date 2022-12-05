@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HW5.Contracts.Response
+﻿namespace HW5.Contracts.Response
 {
-    public class Response<T>
+    public class Response<T> : ResponseBase
     {
-        public string Message { get; set; }
-        public int StatusCode { get; set; }
         public T Data { get; set; }
-        public IDictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+
 
         public static Response<T> Bad(string message)
         {

@@ -24,12 +24,13 @@ namespace HW5.Server.Api.Controllers
 
         [HttpGet]
         [Route("details")]
-        public async Task<Response<Operator>> GetOperatorDetails([FromQuery] int id, [FromQuery] bool includeQuestionnaires = false) => await operatorsService.GetOperatorDetails(id, includeQuestionnaires);
+        public async Task<Response<OperatorFullModel>> GetOperatorDetails([FromQuery] int id, [FromQuery] bool includeQuestionnaires = false) 
+            => await operatorsService.GetOperatorDetails(id, includeQuestionnaires);
         [HttpGet]
-        public async Task<Response<IList<Operator>>> GetOperators([FromQuery] int pageCount = 0, [FromQuery] int pageSize = 10)
+        public async Task<Response<IList<OperatorListModel>>> GetOperators([FromQuery] int pageCount = 1, [FromQuery] int pageSize = 10)
             => await operatorsService.GetOperators(new() { PageCount = pageCount, PageSize = pageSize });
         [HttpPost]
-        public async Task<Response<Operator>> CreateOperator([FromForm] CreateOperatorRequest request) => await operatorsService.CreateOperator(request);
+        public async Task<Response<OperatorFullModel>> CreateOperator([FromForm] CreateOperatorRequest request) => await operatorsService.CreateOperator(request);
         [HttpDelete]
         public async Task<Response> CreateOperator([FromQuery] int id) => await operatorsService.DeleteOperator(id);
 

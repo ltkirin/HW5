@@ -8,10 +8,10 @@ namespace HW5.Server.Business.Interfaces
 {
     public interface IQuestionnairesService
     {
-        Task<Response<Questionnaire>> CreateQuestionnaire(CreateQuestionnaireRequest request);
+        Task<Response<QuestionnaireFullModel>> CreateQuestionnaire(CreateQuestionnaireRequest request);
         Task<Response> DeleteQuestionnaire(int questionnaireId);
-        Task<Response<Questionnaire>> GetQuestionnaireDetails(int id, bool includeOwners);
-        Task<Response<IList<Questionnaire>>> GetQuestionnaires(GetListRequest request);
-        Task<Response<Questionnaire>> UpdateQuestionnaire(UpdateQuestionnaireRequest request);
+        Task<Response<QuestionnaireFullModel>> GetQuestionnaireDetails(int id, bool includeOwners);
+        Task<Response<IList<QuestionnaireListModel>>> GetQuestionnaires(GetListRequest request);
+        Task<Response<QuestionnaireFullModel>> UpdateQuestionnaire(UpdateQuestionnaireRequest request);
     }
 }

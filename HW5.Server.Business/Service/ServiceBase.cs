@@ -20,20 +20,20 @@ namespace HW5.Server.Business.Service
             this.context = context;
         }
 
-        public async Task<Response> Delete<TEntity>(int id) where TEntity : EntityBase
+        public async Task<Response> Delete<TEntity>(int operatorId) where TEntity : EntityBase
         {
             try
             {
-                var entity = await GetEntitiesQuerable<TEntity>().FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
-                if (entity != null)
+                var oper = await GetEntitiesQuerable<TEntity>().FirstOrDefaultAsync(x => x.Id == operatorId && !x.IsDeleted);
+                if (oper != null)
                 {
-                    entity.IsDeleted = true;
+                    oper.IsDeleted = true;
                     await context.SaveChangesAsync();
                     return Response.Ok();
                 }
                 else
                 {
-                    return Response.NotFound($"Entity with type {typeof(TEntity).GetType().Name} and Id {id} is not found or already deleted");
+                    return Response.NotFound($"Entity with type {typeof(TEntity).GetType().Name} and Id {operatorId} is not found or already deleted");
                 }
             }
             catch (Exception e)
@@ -42,38 +42,30 @@ namespace HW5.Server.Business.Service
             }
         }
 
-        public async Task<Response<IList<TEntity>>> GetEntities<TEntity>(GetListRequest request) where TEntity : EntityBase
+        public async Task<IList<TEntity>> GetEntities<TEntity>(GetListRequest request) where TEntity : EntityBase
         {
-            try
-            {
-                var querable = GetEntitiesQuerable<TEntity>();
-                var count = await querable.CountAsync();
-                var entites = await querable
-                    .AsNoTracking()
-                    .Skip(request.PageCount * request.PageSize)
-                    .Take(request.PageSize)
-                    .ToArrayAsync();
-
-                var result = Response<IList<TEntity>>.Ok(entites);
-                result.Metadata.Add("Total", $"{count}");
-                return result;
-            }
-            catch (Exception e)
-            {
-                return Response<IList<TEntity>>.Failed(e.Message);
-            }
+            return await GetEntitiesQuerable<TEntity>()
+                .AsNoTracking()
+                .Skip((request.PageCount - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToArrayAsync();
         }
 
         protected IQueryable<TEntity> GetEntitiesQuerable<TEntity>() where TEntity : EntityBase
         {
             var dbset = context
                .Set<TEntity>();
-            if(dbset != null)
+            if (dbset != null)
             {
                 return dbset.AsQueryable()
                .Where(x => !x.IsDeleted);
             }
             throw new TypeLoadException($"No dbset for {typeof(TEntity).GetType().Name} type");
         }
+
+        protected async Task<int> GetCount<TEntity>() where TEntity : EntityBase => await GetEntitiesQuerable<TEntity>().CountAsync();
+
+
+
     }
 }

@@ -43,8 +43,8 @@ namespace HW5.Server.DataAccess.Context
             {
                 connectionString = extension.ConnectionString;
             }
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
         }
 
         public PgSqlApplicationContext()

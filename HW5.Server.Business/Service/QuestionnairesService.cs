@@ -1,6 +1,7 @@
 ﻿using HW5.Contracts.Request;
 using HW5.Contracts.Response;
 using HW5.Server.Business.Interfaces;
+using HW5.Server.Business.Util;
 using HW5.Server.DataAccess.Context;
 using HW5.Server.Domain.Models;
 using Mapster;
@@ -18,7 +19,7 @@ namespace HW5.Server.Business.Service
         {
         }
 
-        public async Task<Response<Questionnaire>> CreateQuestionnaire(CreateQuestionnaireRequest request)
+        public async Task<Response<QuestionnaireFullModel>> CreateQuestionnaire(CreateQuestionnaireRequest request)
         {
             try
             {
@@ -46,28 +47,28 @@ namespace HW5.Server.Business.Service
 
                 await context.Set<Questionnaire>().AddAsync(questionnaire);
                 await context.SaveChangesAsync();
-                return Response<Questionnaire>.Ok(questionnaire);
+                return Response<QuestionnaireFullModel>.Ok(ModelConverter.GetQuestionnaireFullModel(questionnaire));
 
 
             }
             catch (Exception e)
             {
-                return Response<Questionnaire>.Failed(e.Message);
+                return Response<QuestionnaireFullModel>.Failed(e.Message);
             }
 
 
         }
 
-        public async Task<Response<Questionnaire>> UpdateQuestionnaire(UpdateQuestionnaireRequest request)
+        public async Task<Response<QuestionnaireFullModel>> UpdateQuestionnaire(UpdateQuestionnaireRequest request)
         {
             var quest = await context.Questionnaires.FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == request.Id);
             if(!(await context.Clients.AnyAsync(x => !x.IsDeleted && x.Id == request.ClientId)))
             {
-                return Response<Questionnaire>.NotFound($"Client with Id {request.ClientId} Not found");
+                return Response<QuestionnaireFullModel>.NotFound($"Client with Id {request.ClientId} Not found");
             }
             if(!(await context.Operators.AnyAsync(x => !x.IsDeleted && x.Id == request.OperatorId)))
             {
-                return Response<Questionnaire>.NotFound($"Operator with Id {request.OperatorId} Not found");
+                return Response<QuestionnaireFullModel>.NotFound($"Operator with Id {request.OperatorId} Not found");
             }
             if (quest != null)
             {
@@ -78,12 +79,12 @@ namespace HW5.Server.Business.Service
                 quest.CreditsCount = request.CreditsCount;
                 quest.DepositesCount = request.DepositesCount;
                 await context.SaveChangesAsync();
-                return Response<Questionnaire>.Ok(quest);
+                return Response<QuestionnaireFullModel>.Ok(ModelConverter.GetQuestionnaireFullModel(quest));
 
             }
             else
             {
-                return Response<Questionnaire>.NotFound($"Questionnaire with Id {request.Id} Not found");
+                return Response<QuestionnaireFullModel>.NotFound($"Questionnaire with Id {request.Id} Not found");
             }
 
         }
@@ -91,8 +92,9 @@ namespace HW5.Server.Business.Service
 
         public async Task<Response> DeleteQuestionnaire(int questionnaireId) => await Delete<Questionnaire>(questionnaireId);
 
-        public async Task<Response<IList<Questionnaire>>> GetQuestionnaires(GetListRequest request) => await GetEntities<Questionnaire>(request);
-        public async Task<Response<Questionnaire>> GetQuestionnaireDetails(int id, bool includeOwners)
+        public async Task<Response<IList<QuestionnaireListModel>>> GetQuestionnaires(GetListRequest request)
+              => Response<IList<QuestionnaireListModel>>.Ok(ModelConverter.GetQuestionnaireListModels(await GetEntities<Questionnaire>(request))).SetTotalReturn(await GetCount<Questionnaire>());
+        public async Task<Response<QuestionnaireFullModel>> GetQuestionnaireDetails(int id, bool includeOwners)
         {
             var query = context.Questionnaires.AsQueryable().Where(x => x.Id == id && !x.IsDeleted);
             if (includeOwners)
@@ -103,11 +105,11 @@ namespace HW5.Server.Business.Service
             var searchResult = await query.ToArrayAsync();
             if (searchResult.Any())
             {
-                return Response<Questionnaire>.Ok(searchResult.First());
+                return Response<QuestionnaireFullModel>.Ok(ModelConverter.GetQuestionnaireFullModel(searchResult.First()));
             }
             else
             {
-                return Response<Questionnaire>.NotFound($"Questionnaire with Id {id} Not found");
+                return Response<QuestionnaireFullModel>.NotFound($"Questionnaire with Id {id} Not found");
             }
 
         }
