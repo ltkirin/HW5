@@ -60,7 +60,7 @@ namespace HW5.Server.Business.Util
                         FullName = GetFullName(oper),
                         BirthDate = oper.BirthDate,
                         PhoneNumber = GetPhoneString(oper.PhoneNumber),
-                        JobTitleIndex = (int)oper.JobTitle
+                        JobTitleIndex = (int)oper.JobTitle,
                         WorkExperience = oper.WorkExperience
                     });
             }
