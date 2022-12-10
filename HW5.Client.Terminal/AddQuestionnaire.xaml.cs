@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace HW5.Client.Terminal
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary> Операторы  TextWrapping="Wrap" 
-    public partial class MainWindow : Window
+    /// Логика взаимодействия для AddQuestionnaire.xaml
+    /// </summary>
+    public partial class AddQuestionnaire : Window
     {
-        public MainWindow()
+        public AddQuestionnaire()
         {
             InitializeComponent();
-        }
-
-        private void OperatorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

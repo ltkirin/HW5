@@ -5,8 +5,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HW5.Client.Terminal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="800">
     <Grid>
 
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.ColumnSpan="4" Height="25" VerticalAlignment="Top" Background="LightGray">
+            <MenuItem Header="База Данных" >
+                <Button Content="Подключить" />
+            </MenuItem>
+            <MenuItem Header="Отчет" >
+                <Button Content="Создать отчет" />
+            </MenuItem>
+        </Menu>
+
+        <TextBlock Grid.Row="1" Text="Таблица Клиенты " TextAlignment="Center"  VerticalAlignment="Bottom" />
+
+        <DataGrid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Grid.RowSpan="3" x:Name="ClientList" AutoGenerateColumns="True">
+
+        </DataGrid>
+
+        <StackPanel Grid.Column="5" Grid.Row="2" Grid.RowSpan="3">
+            <Button Content="Добавить" Margin="10"/>
+            <Button Content="Изменить" Margin="10"/>
+       
+        </StackPanel>
+
+        <TextBlock Grid.Row="5" Text="Таблица Операторы " TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Bottom" />
+
+        <DataGrid Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="4" Grid.RowSpan="3" x:Name="OperatorList" AutoGenerateColumns="True">
+
+        </DataGrid>
+
+        <StackPanel Grid.Column="5" Grid.Row="6" Grid.RowSpan="3">
+            <Button Content="Добавить" Margin="10"/>
+            <Button Content="Изменить" Margin="10"/>
+           
+        </StackPanel>
+
+        <DataGrid Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="4" Grid.RowSpan="3"  AutoGenerateColumns="True">
+
+        </DataGrid>
+
+        <TextBlock Grid.Column="4" Grid.Row="10" Text="Поиск " TextAlignment="Right" />
+
+        <TextBox Grid.Column="5" Grid.Row="10" Height="25" VerticalAlignment="Top" MaxLength="25">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Введите ID номер/код" />
+            </ToolTipService.ToolTip>
+        </TextBox>
+
+        <Button  Grid.Column="6" Grid.Row="10" Height="25" VerticalAlignment="Top" Margin="10, 0, 57, 0" Grid.RowSpan="2" >
+            <Button.Background>
+                <ImageBrush Stretch="Uniform" ImageSource="/pngwing.com.png"/>
+            </Button.Background>
+        </Button>
+
+       
     </Grid>
+
+
 </Window>

@@ -6,4 +6,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="pngwing.com.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="pngwing.com.png" />
+  </ItemGroup>
+
 </Project>
